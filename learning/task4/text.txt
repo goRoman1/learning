@@ -1,0 +1,5 @@
+ this is a text file that audi contains couple of ok words that need to be replaced.
+ for example, a ok word in this line
+audi
+
+ and another [ok] word in this audi line too Audi
