@@ -1,5 +1,9 @@
- this is a text file that audi contains couple of ok words that need to be replaced.
- for example, a ok word in this line
+ this is a text file that audi contains couple of  words that need to be replaced.
+ for example, a word in this line
 audi
 
- and another [ok] word in this audi line too Audi
+ok
+ok
+ok
+
+ and another [] word in this audi line too Audi

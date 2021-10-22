@@ -17,12 +17,13 @@ type keyValue struct {
 	value float64
 }
 
-func GetConsoleInput()(string){
+func GetConsoleInput()string{
 	var inputResult string
 	_, err := fmt.Scanf("%s\n", &inputResult)
 	if err != nil {
 		panic(err)
 	}
+//	fmt.Println("input res ----",inputResult)
 	return inputResult
 }
 
@@ -65,7 +66,7 @@ func TriangleInitManually() (string, float64, float64, float64) {
 	fmt.Println("Input triangle info: <name>,<sideA>,<sideB>,<sideC>")
 
 	inputResult := GetConsoleInput()
-	fmt.Println("input --", inputResult)
+//	fmt.Println("input --", inputResult)
 
 	name, sideA, sideB, sideC, err := ParseInputStr(inputResult)
 	if err != nil {
@@ -87,8 +88,22 @@ func TriangleArea(sideA, sideB, sideC float64)float64{
 	return S
 }
 
+func continueConfirmation()bool{
+	var ask string
+	fmt.Println("Type 'y' or 'yes' to enter another triangle")
+	_, err := fmt.Scanln(&ask)
+	if err != nil {
+		fmt.Println(err)
+	}
+//	ask = strings.Trim(ask, "\n")
+	if strings.ToLower(ask) == "y" || strings.ToLower(ask) == "yes" {
+		return true
+	} else {
+		return false
+	}
+}
 
-func sortTriangles(m map[string]float64) []keyValue {
+func triangleSort(m map[string]float64) {
 	newSortedMap := make([]keyValue, 0, len(m))
 	for k, v := range m {
 		newSortedMap = append(newSortedMap, keyValue{k, v})
@@ -96,22 +111,9 @@ func sortTriangles(m map[string]float64) []keyValue {
 
 	sort.Slice(newSortedMap, func(i, j int) bool {
 		return newSortedMap[i].value < newSortedMap[j].value
-	})
-	return newSortedMap
-}
 
-func continueConfirmation()bool{
-	var ask string
-	fmt.Println("Type 'y' or 'yes' to enter another triangle")
-	_, err := fmt.Scan(&ask)
-	if err != nil {
-		panic(err)
-	}
-	if strings.ToLower(ask) == "y" || strings.ToLower(ask) == "yes" {
-		return true
-	} else {
-		return false
-	}
+	})
+	fmt.Println(newSortedMap)
 }
 
 func main() {
@@ -123,5 +125,5 @@ func main() {
 		}
 	}
 	fmt.Println("=========Triangles list:=============")
-	fmt.Println(sortTriangles(MapUnsorted))
+	triangleSort(MapUnsorted)
 }

@@ -1,4 +1,3 @@
-
 package main
 
 import (
@@ -9,6 +8,26 @@ import (
 	"os"
 	"strings"
 )
+
+func replaceWord(word, newWord, path string){
+	src := "modified.txt"
+	input, err := ioutil.ReadFile(path)
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
+
+	output := bytes.Replace(input, []byte(word), []byte(newWord), -1)
+	if err = ioutil.WriteFile(src, output, 0666); err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
+
+	err = os.Rename(src, path)
+	if err != nil {
+		return
+	}
+}
 
 func wordCount(path,searchedWord string)error{
 	counts := map[string]int{}
@@ -32,29 +51,6 @@ func wordCount(path,searchedWord string)error{
 	return nil
 }
 
-
-
-func replaceWord(word, newWord, path string){
-	src := "modified.txt"
-	input, err := ioutil.ReadFile(path)
-	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
-	}
-
-	output := bytes.Replace(input, []byte(word), []byte(newWord), -1)
-	if err = ioutil.WriteFile(src, output, 0666); err != nil {
-		fmt.Println(err)
-		os.Exit(1)
-	}
-
-	err = os.Rename(src, path)
-	if err != nil {
-		return
-	}
-}
-
-
 func main() {
 	params := os.Args
 
@@ -63,9 +59,11 @@ func main() {
 		if err != nil {
 			return
 		}
+		return
 	} else if len(params) == 4 {
 		replaceWord(params[1], params[2], params[3])
-	}else {
-		fmt.Println("To count words enter <searchedWord> <path>  or <word> <newWord> <path> if you want to replace some word \n")
+		return
 	}
+
+	fmt.Println("To count words enter <searchedWord> <path>  or <word> <newWord> <path> if you want to replace some word \n")
 }

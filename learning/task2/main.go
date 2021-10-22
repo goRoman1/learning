@@ -2,75 +2,109 @@ package main
 
 import (
 	"fmt"
+	"strconv"
 	"strings"
 )
 
-func envelopeCompare(){
-	var x1 float64
-	fmt.Println("Введите ширину первого конверта")
-	_, err := fmt.Scanf("%f\n", &x1)
-	if err != nil {
-		panic(err)
+type Envelope struct {
+	height, width float64
+}
+
+type EnvelopeI interface {
+	maxSide() float64
+	minSide() float64
+	CanBeNested(envelopeToFit Envelope) bool
+}
+
+func (env Envelope) maxSide() float64 {
+	if env.height > env.width {
+		return env.height
 	}
-	var y1 float64
-	fmt.Println("Введите высоту первого конверта")
-	_, err = fmt.Scanf("%f\n", &y1)
-	if err != nil {
-		panic(err)
+	return env.width
+}
+
+func (env Envelope) minSide() float64 {
+	if env.height < env.width {
+		return env.height
 	}
-	var x2 float64
-	fmt.Println("Введите ширину второго конверта")
-	_, err = fmt.Scanf("%f\n", &x2)
-	if err != nil {
-		panic(err)
+	return env.width
+}
+
+func (env Envelope) CanBeNested(envelopeToFit Envelope) bool {
+	if env.maxSide() < envelopeToFit.maxSide() && env.minSide() < envelopeToFit.minSide() {
+		return true
 	}
-	var y2 float64
-	fmt.Println("Введите высоту второго конверта")
-	_, err = fmt.Scanf("%f\n", &y2)
+	return false
+}
+
+func setEnvelopParameters() (Envelope, error) {
+	height := triangleSideSet("Envelope height:")
+	width := triangleSideSet("Envelope width:")
+	return Envelope{height, width}, nil
+}
+
+func triangleSideSet(str string)float64{
+	fmt.Println(str)
+	var inp string
+	_, err := fmt.Scanln(&inp)
 	if err != nil {
-		panic(err)
+		fmt.Println("An error occurred 1:", err)
 	}
-	if x1 > x2{
-		if y1 > y2{
-			fmt.Printf("Второй конверт со сторонами , %f, %f можно вложить в первый конверт со сторонами %f, %f \n", x2, y2, x1, y1 )
-		}else {
-			if x1 > y2 {
-				if y1 > x2 {
-					fmt.Printf("Второй конверт со сторонами , %f, %f можно вложить в первый конверт со сторонами %f, %f \n", x2, y2, x1, y1 )
-				}
-			} else {
-				fmt.Println("Конверты нельзя вложить друг в друга")
-			}
+
+	floatParam, err := strconv.ParseFloat(inp, 64)
+	if err != nil {
+		fmt.Println("An error occurred 2:", err)
+	}
+
+	if floatParam < 0 {
+		fmt.Println("Side length must be longer then 0")
+	}
+	return floatParam
+}
+
+func askForContinuing() bool{
+	fmt.Println("Type 'y' or 'yes' to continue")
+	var ask string
+	_, err := fmt.Scanln(&ask)
+	if err != nil {
+		return false
+	}
+
+	ask = strings.TrimSpace(strings.ToLower(ask))
+	if ask == "yes" || ask == "y"{
+		return true
+	}
+	return false
+}
+
+func checkNesting(envelope1, envelope2 Envelope) (int, error) {
+	if envelope1.CanBeNested(envelope2){
+		return fmt.Println("First can be nested into Second")
+	}else if envelope2.CanBeNested(envelope1){
+		return fmt.Println("Second can be nested into First")
+	}
+	return fmt.Println("Envelopes cannot be nested to each other")
+}
+
+func main() {
+	for{
+		fmt.Println("Enter first envelope parameters")
+		envelope1, err := setEnvelopParameters()
+		if err != nil {
+			fmt.Println(err)
 		}
-	}else {
-		if x1 > y2{
-			if y1 > x2 {
-				fmt.Printf("Пеорвый конверт со сторонами , %f, %f можно вложить в второй конверт со сторонами %f, %f \n", x1, y1, x2, y2)
-			}else {
-				fmt.Println("Конверты нельзя вложить друг в друга")
-			}
-		}else{
-			fmt.Printf("Пеорвый конверт со сторонами , %f, %f можно вложить в второй конверт со сторонами %f, %f \n", x1, y1, x2, y2)
+
+		fmt.Println("Enter first envelope parameters")
+		envelope2, err := setEnvelopParameters()
+		if err != nil {
+			fmt.Println(err)
+		}
+
+		checkNesting(envelope1, envelope2)
+
+		if !askForContinuing(){
+			break
 		}
 	}
 }
 
-func main() {
-	var count int = 0
-	for {
-		if count == 0 {
-			envelopeCompare()
-			count++
-		}else{
-			var ask string
-			fmt.Println("Для повторного подсчета введите 'y' или 'yes'")
-			fmt.Scanf("%s\n", &ask)
-			if strings.ToLower(ask) == "y" || strings.ToLower(ask) == "yes"{
-				envelopeCompare()
-			}else{
-				fmt.Println("Конец выполенния")
-				break
-			}
-		}
-	}
-}
