@@ -18,19 +18,19 @@ func fibRecursion(n int) int {
 
 //количество чисел в промежутке
 func countFibs(low, high int) []int {
-	var f1,f2,f3 = 0, 1, 1
+	var num1, num2, num3 = 0, 1, 1
 	var numSlice []int
 	//0, 1, 1, 2, З, 5, 8, 1З, 21, З4, 55, 89, 144
 //	var result int
-	for f1 <= high{
-		if f1 > low{
+	for num1 <= high{
+		if num1 > low{
 //			result ++  //количество чичел в промежутке
-			numSlice = append(numSlice, f1)
-//			fmt.Println(f1)
+			numSlice = append(numSlice, num1)
+//			fmt.Println(num1)
 		}
-		f1 = f2
-		f2 = f3
-		f3 = f1 + f2
+		num1 = num2
+		num2 = num3
+		num3 = num1 + num2
 	}
 	return  numSlice
 }
