@@ -1,0 +1,9 @@
+ this is a text file that audi contains couple of  words that need to be replaced.
+ for example, a word in this line
+audi
+
+ok
+ok
+ok
+
+ and another [] word in this audi line too Audi
