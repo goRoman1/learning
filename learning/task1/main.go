@@ -7,7 +7,7 @@ import (
 	"strconv"
 	"strings"
 )
-
+//
 func drawField(width, height int){
 	symbol := "*"
 	blank := " "
