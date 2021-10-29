@@ -16,10 +16,7 @@ func sumInRange(upper int)int{
 	var sum int
 	for i := 0; i < upper; i++ {
 		num := friendlyForNumber(i)
-		if num == i {
-			continue
-		}
-		if friendlyForNumber(num) == i {
+		if friendlyForNumber(num) == i && num != i {
 			sum += i
 		}
 	}

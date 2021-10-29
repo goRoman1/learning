@@ -6,15 +6,14 @@ import (
 	"strconv"
 	"strings"
 )
-func integerToTriplets(number int) []int {
-	triplets := []int{}
+func intToSlice(number int) []int {
+	var slice []int
 
 	for number > 0 {
-		triplets = append(triplets, number%1000)
+		slice = append(slice, number%1000)
 		number = number / 1000
 	}
-
-	return triplets
+	return slice
 }
 
 func plural(n int, words []string) string {
@@ -37,7 +36,6 @@ func plural(n int, words []string) string {
 	return words[index]
 }
 
-// IntegerToRu converts an integer to Russian words
 func IntegerToRu(input int) string {
 	var russianUnits = []string{
 		"",
@@ -110,24 +108,19 @@ func IntegerToRu(input int) string {
 		input *= -1
 	}
 
-	// split integer in triplets
-	triplets := integerToTriplets(input)
+	triplets := intToSlice(input)
 
-	// zero is a special case
 	if len(triplets) == 0 {
 		return "нуль"
 	}
 
-	// iterate over triplets
 	for idx := len(triplets) - 1; idx >= 0; idx-- {
 		triplet := triplets[idx]
 
-		// nothing todo for empty triplet
 		if triplet == 0 {
 			continue
 		}
 
-		// three-digits
 		hundreds := triplet / 100 % 10
 		tens := triplet / 10 % 10
 		units := triplet % 10
@@ -152,7 +145,6 @@ func IntegerToRu(input int) string {
 			}
 		}
 
-		// mega
 		if idx >= 1 && idx < len(russianMegas) {
 			mega := russianMegas[idx]
 			tens = tens*10 + units
