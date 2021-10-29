@@ -3,36 +3,32 @@ package main
 import "fmt"
 
 func friendlyForNumber(n int) int {
-	var a int
+	var sum int
 	for i := 1; i < n; i ++ {
 		if n%i == 0{
-			a += i
+			sum += i
 		}
 	}
-	return a
+	return sum
 }
 
-func sliceOfFriendlyNums(upper int)[]int{
-	var friendlySlice []int
+func sumInRange(upper int)int{
+	var sum int
 	for i := 0; i < upper; i++ {
-		sum := friendlyForNumber(i)
-		if sum == i {
+		num := friendlyForNumber(i)
+		if num == i {
 			continue
 		}
-		if friendlyForNumber(sum) == i {
-			friendlySlice = append(friendlySlice, i)
+		if friendlyForNumber(num) == i {
+			sum += i
 		}
 	}
-	return friendlySlice
+	return sum
 }
 
 func main (){
-	var sum int
-	friendlySlice := sliceOfFriendlyNums(10000)
-	for i := 0; i < len(friendlySlice); i++ {
-		sum += friendlySlice[i]
-	}
-	fmt.Println(sum)
+
+	fmt.Println(sumInRange(10000))
 
 }
 
