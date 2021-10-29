@@ -1,10 +1,10 @@
-package eng
+package main
 
 import (
 	"fmt"
 	"testing"
 
-"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestIntegerToRuRu(t *testing.T) {
@@ -80,7 +80,7 @@ func TestIntegerToRuRu(t *testing.T) {
 	for input, expectedOutput := range tests {
 		name := fmt.Sprintf("%d", input)
 		t.Run(name, func(t *testing.T) {
-			assert.Equal(t, expectedOutput, IntegerToRuRu(input))
+			assert.Equal(t, expectedOutput, IntegerToRu(input))
 		})
 	}
 }

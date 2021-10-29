@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-func replaceWord(word, newWord, path string){
+func ReplaceWord(word, newWord, path string){
 	src := "modified.txt"
 	input, err := ioutil.ReadFile(path)
 	if err != nil {
@@ -29,11 +29,11 @@ func replaceWord(word, newWord, path string){
 	}
 }
 
-func wordCount(path,searchedWord string)error{
+func WordCount(path,searchedWord string)int{
 	counts := map[string]int{}
 	file, err := os.Open(path)
 	if err != nil {
-		return err
+		fmt.Println(err)
 	}
 	defer file.Close()
 
@@ -45,25 +45,27 @@ func wordCount(path,searchedWord string)error{
 		counts[word]++
 	}
 	if err != nil {
-		return err
+		fmt.Println(err)
 	}
+
 	fmt.Println("Number of count is", counts[searchedWord])
-	return nil
+	return counts[searchedWord]
 }
+
 
 func main() {
 	params := os.Args
 
 	if len(params) == 3 {
-		err := wordCount(params[1], params[2])
+		_, err := fmt.Println(WordCount(params[1], params[2]))
 		if err != nil {
 			return
 		}
 		return
 	} else if len(params) == 4 {
-		replaceWord(params[1], params[2], params[3])
+		ReplaceWord(params[1], params[2], params[3])
 		return
 	}
 
-	fmt.Println("To count words enter <searchedWord> <path>  or <word> <newWord> <path> if you want to replace some word \n")
+	fmt.Println("To count words enter <searchedWord> <path>  or <word> <newWord> <path> if you want to replace some word")
 }

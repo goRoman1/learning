@@ -1,9 +1,7 @@
 package main
 
 import (
-	"errors"
 	"fmt"
-	"log"
 	"math"
 	"sort"
 	"strconv"
@@ -35,7 +33,7 @@ func ParseToFloat(str string) (float64, bool) {
 	return res, true
 }
 
-func CanBeTriangle(sideA, sideB, sideC float64) bool {
+func IsTriangle(sideA, sideB, sideC float64) bool {
 	return sideA+sideB > sideC && sideB+sideC > sideA && sideC+sideA > sideB
 }
 
@@ -45,10 +43,10 @@ func TrimTabsAndSpaces(str string) string {
 	return res
 }
 
-func ParseInputStr(inputStr string)(string, float64, float64, float64, error){
+func ParseInputStr(inputStr string)(string, float64, float64, float64){
 	foundParams := strings.Split(inputStr, ",")
 	if len(foundParams) != 4 {
-		return "", 0, 0, 0, errors.New("number of received parameters doesn't equal to 4")
+		fmt.Println("number of received parameters doesn't equal to 4")
 	}
 	name :=  TrimTabsAndSpaces(foundParams[0])
 	sideA, okA := ParseToFloat(foundParams[1])
@@ -56,26 +54,20 @@ func ParseInputStr(inputStr string)(string, float64, float64, float64, error){
 	sideC, okC := ParseToFloat(foundParams[3])
 
 	if !okA || !okB || !okC {
-		return "", 0, 0, 0, errors.New("cannot parse one ore more side sizes")
+		fmt.Println("cannot parse one ore more side sizes")
 	}
 
-	return name, sideA, sideB, sideC, nil
+	return name, sideA, sideB, sideC
 }
 
 func TriangleInitManually() (string, float64, float64, float64) {
 	fmt.Println("Input triangle info: <name>,<sideA>,<sideB>,<sideC>")
 
 	inputResult := GetConsoleInput()
-//	fmt.Println("input --", inputResult)
+	name, sideA, sideB, sideC:= ParseInputStr(inputResult)
 
-	name, sideA, sideB, sideC, err := ParseInputStr(inputResult)
-	if err != nil {
-		log.Println(err, name,sideA,sideB,sideC)
-	}
-
-	if !CanBeTriangle(sideA, sideB, sideC) {
+	if !IsTriangle(sideA, sideB, sideC) {
 		fmt.Println("The sum of any two parties must be greater than the third")
-		panic(err)
 	}
 
 	return name, sideA, sideB, sideC
@@ -103,7 +95,7 @@ func continueConfirmation()bool{
 	}
 }
 
-func triangleSort(m map[string]float64) {
+func triangleSort(m map[string]float64) []keyValue {
 	newSortedMap := make([]keyValue, 0, len(m))
 	for k, v := range m {
 		newSortedMap = append(newSortedMap, keyValue{k, v})
@@ -113,7 +105,8 @@ func triangleSort(m map[string]float64) {
 		return newSortedMap[i].value < newSortedMap[j].value
 
 	})
-	fmt.Println(newSortedMap)
+
+	 return newSortedMap
 }
 
 func main() {
@@ -125,5 +118,6 @@ func main() {
 		}
 	}
 	fmt.Println("=========Triangles list:=============")
-	triangleSort(MapUnsorted)
+	fmt.Println(triangleSort(MapUnsorted))
+
 }

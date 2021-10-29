@@ -36,7 +36,7 @@ func countFibs(low, high int) []int {
 }
 
 
-func makeSliceOfStrings(values []int) string {
+func makeString(values []int) string {
 	var valuesText []string
 	for i := range values {
 		number := values[i]
@@ -49,7 +49,6 @@ func makeSliceOfStrings(values []int) string {
 }
 
 func main() {
-
 	argsArray := os.Args[1:]
 	if len(argsArray) != 2 {
 		fmt.Println("Должно быть два аргумента")
@@ -64,6 +63,6 @@ func main() {
 	}
 
 	var sliceOfInts = countFibs(start,end)
-	var StringFib = makeSliceOfStrings(sliceOfInts)
+	var StringFib = makeString(sliceOfInts)
 	fmt.Println(StringFib)
 }

@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-func countNums(num float64)[]int{
+func CountNums(num float64)[]int{
 	var x []int
 	sqrtNum := math.Sqrt(num)
 	fmt.Println(sqrtNum)
@@ -18,7 +18,7 @@ func countNums(num float64)[]int{
 	return x
 }
 
-func makeSliceOfStrings(values []int){
+func MakeSliceOfStrings(values []int)string{
 	var valuesText []string
 	for i := range values {
 		number := values[i]
@@ -27,7 +27,7 @@ func makeSliceOfStrings(values []int){
 	}
 
 	result := strings.Join(valuesText, ",")
-	fmt.Println(result)
+	return result
 }
 
 func main(){
@@ -38,7 +38,8 @@ func main(){
 
 	floatParam, _ := strconv.ParseFloat(strings.TrimLeft(argsArray[0], "-"), 64)
 
-	sliceOfInt := countNums(floatParam)
-	makeSliceOfStrings(sliceOfInt)
+	sliceOfInt := CountNums(floatParam)
+	fmt.Println("sloice", sliceOfInt)
+	fmt.Println(MakeSliceOfStrings(sliceOfInt))
 
 }

@@ -77,13 +77,13 @@ func askForContinuing() bool{
 	return false
 }
 
-func checkNesting(envelope1, envelope2 Envelope) (int, error) {
+func checkNesting(envelope1, envelope2 Envelope) string {
 	if envelope1.CanBeNested(envelope2){
-		return fmt.Println("First can be nested into Second")
+		return "First can be nested into Second"
 	}else if envelope2.CanBeNested(envelope1){
-		return fmt.Println("Second can be nested into First")
+		return "Second can be nested into First"
 	}
-	return fmt.Println("Envelopes cannot be nested to each other")
+	return "Envelopes cannot be nested to each other"
 }
 
 func main() {
@@ -94,17 +94,16 @@ func main() {
 			fmt.Println(err)
 		}
 
-		fmt.Println("Enter first envelope parameters")
+		fmt.Println("Enter second envelope parameters")
 		envelope2, err := setEnvelopParameters()
 		if err != nil {
 			fmt.Println(err)
 		}
 
-		checkNesting(envelope1, envelope2)
+		fmt.Println(checkNesting(envelope1, envelope2))
 
 		if !askForContinuing(){
 			break
 		}
 	}
 }
-
