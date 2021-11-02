@@ -40,6 +40,7 @@ func IsTriangle(sideA, sideB, sideC float64) bool {
 func TrimTabsAndSpaces(str string) string {
 	res := strings.Trim(str, " ")
 	res = strings.Trim(res, "\t")
+	res = strings.Trim(res, " ")
 	return res
 }
 

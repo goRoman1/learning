@@ -29,7 +29,7 @@ func TestCountFibs(t *testing.T) {
 		t.Logf("Calling TriangleArea(%d%d), result %d\n",
 			testCase.low, testCase.high, testCase.expected)
 		//Assert
-		if reflect.DeepEqual(result, testCase.expected){
+		if !reflect.DeepEqual(result, testCase.expected){
 			t.Errorf("Incorrect result. Expect %d, got %d",
 				testCase.expected, result)
 		}
@@ -58,7 +58,7 @@ func TestMakeString(t *testing.T) {
 		t.Logf("Calling TriangleArea(%d), result %s\n",
 			testCase.intSlice, testCase.expected)
 		//Assert
-		if reflect.DeepEqual(result, testCase.expected){
+		if !reflect.DeepEqual(result, testCase.expected){
 			t.Errorf("Incorrect result. Expect %s, got %s",
 				testCase.expected, result)
 		}

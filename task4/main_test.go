@@ -1,6 +1,12 @@
 package main
 
-import "testing"
+import (
+	"bytes"
+	"fmt"
+	"io/ioutil"
+	"log"
+	"testing"
+)
 
 func TestWordCount(t *testing.T) {
 	//Arrange
@@ -10,14 +16,9 @@ func TestWordCount(t *testing.T) {
 		expected 		int
 	}{
 		{
-			path:  "text.txt",
-			searchedWord :  "ok",
+			path:  "test1.txt",
+			searchedWord :"santa",
 			expected: 3,
-		},
-		{
-			path:  "text.txt",
-			searchedWord :  "and",
-			expected: 2,
 		},
 	}
 
@@ -25,7 +26,7 @@ func TestWordCount(t *testing.T) {
 	for _, testCase := range testTable {
 		result := WordCount(testCase.path, testCase.searchedWord)
 
-		t.Logf("Calling TriangleArea(%s%s), result %d\n",
+		t.Logf("Calling TestWordCount(%s%s), result %d\n",
 			testCase.path, testCase.searchedWord, testCase.expected)
 		//Assert
 		if result != testCase.expected {
@@ -36,38 +37,49 @@ func TestWordCount(t *testing.T) {
 
 }
 
-/*
 func TestReplaceWord(t *testing.T) {
 	//Arrange
 	testTable := []struct {
 		path    		string
-		searchedWord 	string
-		expected 		int
+		word		 	string
+		newWord			string
+		expected 		bool
 	}{
 		{
-			path:  "text.txt",
-			searchedWord :  "ok",
-			expected: 3,
-		},
-		{
-			path:  "text.txt",
-			searchedWord :  "and",
-			expected: 2,
+			path:  "test2.txt",
+			word: "jfd",
+			newWord: "ok",
+			expected: true,
 		},
 	}
 
 	//Act
 	for _, testCase := range testTable {
-		result := WordCount(testCase.path, testCase.searchedWord)
+		input, err := ioutil.ReadFile(testCase.path)
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
 
-		t.Logf("Calling TriangleArea(%s%s), result %d\n",
-			testCase.path, testCase.searchedWord, testCase.expected)
+		output := ReplaceWord(testCase.path, testCase.word, testCase.newWord)
+		compare := bytes.Compare(input,output)
+
+		err = ioutil.WriteFile(testCase.path, input, 0644)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+
 		//Assert
-		if result != testCase.expected {
-			t.Errorf("Incorrect result. Expect %d, got %d",
-				testCase.expected, result)
+		if  compare == 0 && output != nil {
+			t.Errorf("The content of the files has not been changed")
+		} else if output == nil {
+			t.Errorf("The error occured during function execution")
+		} else {
+			t.Logf("Calling ReplaceWord(%s%s%s), \n",
+				testCase.path, testCase.word, testCase.newWord)
 		}
 	}
 
 }
-*/
+

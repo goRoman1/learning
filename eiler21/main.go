@@ -24,8 +24,6 @@ func sumInRange(upper int)int{
 }
 
 func main (){
-
 	fmt.Println(sumInRange(10000))
-
 }
 

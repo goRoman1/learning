@@ -33,6 +33,7 @@ func TestContinueConfirmation(t *testing.T) {
 }
  */
 
+
 func TestCanBeTriangle(t *testing.T) {
 	testTable := []struct{
 		a, b, c  float64
@@ -64,7 +65,7 @@ func TestCanBeTriangle(t *testing.T) {
 	}
 }
 
-func TestParseTriangleInput(t *testing.T) {
+func TestParseInputStr(t *testing.T) {
 	testTable := []struct {
 		input                           string
 		expectedA, expectedB, expectedC float64
@@ -73,23 +74,9 @@ func TestParseTriangleInput(t *testing.T) {
 		{
 			input : "tr1,2,3,4",
 			expectedA: 2.0,
-			expectedB:3.0,
-			expectedC:4.0,
+			expectedB: 3.0,
+			expectedC: 4.0,
 			expectedName: "tr1" ,
-		},
-		{
-			input : "2,3,4",
-			expectedA:0.0,
-			expectedB:0.0,
-			expectedC:0.0,
-			expectedName: "",
-		},
-		{
-			input : "tr1,2,3,ab",
-			expectedA: 0.0,
-			expectedB:0.0,
-			expectedC:0.0,
-			expectedName: "" ,
 		},
 	}
 
@@ -153,5 +140,6 @@ func TestTriangleArea(t *testing.T) {
 		}
 	}
 }
+
 
 

@@ -9,24 +9,27 @@ import (
 	"strings"
 )
 
-func ReplaceWord(word, newWord, path string){
+func ReplaceWord(path, word, newWord string)[]byte{
 	src := "modified.txt"
 	input, err := ioutil.ReadFile(path)
 	if err != nil {
 		fmt.Println(err)
-		os.Exit(1)
+		return nil
 	}
 
 	output := bytes.Replace(input, []byte(word), []byte(newWord), -1)
+	fmt.Println(output)
 	if err = ioutil.WriteFile(src, output, 0666); err != nil {
 		fmt.Println(err)
-		os.Exit(1)
+		return nil
 	}
 
 	err = os.Rename(src, path)
 	if err != nil {
-		return
+		fmt.Println(err)
+		return nil
 	}
+	return output
 }
 
 func WordCount(path,searchedWord string)int{
@@ -37,18 +40,18 @@ func WordCount(path,searchedWord string)int{
 	}
 	defer file.Close()
 
-	scanner := bufio.NewScanner(file)
-	scanner.Split(bufio.ScanWords)
-	for scanner.Scan() {
-		word := scanner.Text()
-		word = strings.ToLower(word)
-		counts[word]++
+	scanner := bufio.NewScanner(file)  //
+	scanner.Split(bufio.ScanWords)     //
+	for scanner.Scan() {               //
+		word := scanner.Text()         //
+		word = strings.ToLower(word)   //
+		counts[word]++                 //
 	}
 	if err != nil {
 		fmt.Println(err)
 	}
 
-	fmt.Println("Number of count is", counts[searchedWord])
+//	fmt.Println("Number of count is", counts[searchedWord])
 	return counts[searchedWord]
 }
 
@@ -67,5 +70,5 @@ func main() {
 		return
 	}
 
-	fmt.Println("To count words enter <searchedWord> <path>  or <word> <newWord> <path> if you want to replace some word")
+	fmt.Println("To count words enter <path> <searchedWord>  or <path> <word> <newWord>  if you want to replace some word")
 }

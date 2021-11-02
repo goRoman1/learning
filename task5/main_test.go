@@ -2,11 +2,12 @@ package main
 
 import (
 	"fmt"
+//	"reflect"
 	"strconv"
 	"testing"
 )
 
-func TestParseFile(t *testing.T) {
+func TestIntegerToRu(t *testing.T) {
 	//Arrange
 	testTable := []struct {
 		input    		string
@@ -43,3 +44,88 @@ func TestParseFile(t *testing.T) {
 		}
 	}
 }
+/*
+func TestIntToTrio(t *testing.T) {
+	//Arrange
+	testTable := []struct {
+		number    	int
+		expected 	[]int
+	}{
+		{
+			number:  1234,
+			expected: []int{234,1},
+		},
+	}
+
+	//Act
+	for _, testCase := range testTable {
+		result := intToTrio(testCase.number)
+
+		t.Logf("Calling intToTrio(%d), result %v\n",
+			testCase.number, testCase.expected)
+		//Assert
+		if reflect.DeepEqual(result, testCase.expected){
+			t.Errorf("Incorrect result. Expect %v, got %v",
+				testCase.expected, result)
+		}
+	}
+}
+
+
+func TestOneTwoUnitFix(t *testing.T) {
+	//Arrange
+	testTable := []struct {
+		unit, idx    	int
+		arr             []string
+		expected 		string
+	}{
+		{
+			unit:  1,
+			idx : 2,
+			arr: []string{"",""},
+			expected: "одна",
+		},
+	}
+
+	//Act
+	for _, testCase := range testTable {
+		result := oneTwoUnitFix(testCase.unit,testCase.idx,testCase.arr)
+
+		t.Logf("Calling IntegerToRu(%d, %d,%v), result %s\n",
+			testCase.unit, testCase.idx, testCase.arr, testCase.expected)
+		//Assert
+		if result != testCase.expected{
+			t.Errorf("Incorrect result. Expect %v, got %v",
+				testCase.expected, result)
+		}
+	}
+}
+
+func TestPlural(t *testing.T) {
+	//Arrange
+	testTable := []struct {
+		n    		int
+		words    	[]string
+		expected 	string
+	}{
+		{
+			n: 5,
+			words: []string{"",""},
+			expected: "одна",
+		},
+	}
+
+	//Act
+	for _, testCase := range testTable {
+		result := plural(testCase.n,testCase.words)
+
+		t.Logf("Calling IntegerToRu(%d,%v), result %s\n",
+			testCase.n, testCase.words, testCase.expected)
+		//Assert
+		if result != testCase.expected{
+			t.Errorf("Incorrect result. Expect %v, got %v",
+				testCase.expected, result)
+		}
+	}
+}
+ */

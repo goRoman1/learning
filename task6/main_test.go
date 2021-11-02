@@ -24,14 +24,13 @@ func TestToIntSlice(t *testing.T) {
 		t.Logf("Calling ToIntSlice(%s), result %d\n",
 			testCase.str, testCase.expected)
 		//Assert
-		if reflect.DeepEqual(testCase.expected, result) {
+		if !reflect.DeepEqual(testCase.expected, result){
 			t.Errorf("Incorrect result. Expect %d, got %d",
 				testCase.expected, result)
 		}
 	}
 
 }
-
 
 func TestIsPiter(t *testing.T) {
 	//Arrange
@@ -81,7 +80,7 @@ func TestIsMoskow(t *testing.T) {
 	for _, testCase := range testTable {
 		result := isMoskow(testCase.input)
 
-		t.Logf("Calling isPiter(%d), result %v\n",
+		t.Logf("Calling isMoscow(%d), result %v\n",
 			testCase.input, testCase.expected)
 		//Assert
 		if len(testCase.input) != 6 {
@@ -113,10 +112,10 @@ func TestParseFile(t *testing.T) {
 	for _, testCase := range testTable {
 		result := parseFile(testCase.path)
 
-		t.Logf("Calling TriangleArea(%s), result %v\n",
+		t.Logf("Calling ParseFile(%s), result %v\n",
 			testCase.path, testCase.expected)
 		//Assert
-		if reflect.DeepEqual(result, testCase.expected){
+		if !reflect.DeepEqual(result, testCase.expected){
 			t.Errorf("Incorrect result. Expect %v, got %v",
 				testCase.expected, result)
 		}
