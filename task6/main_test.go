@@ -19,7 +19,7 @@ func TestToIntSlice(t *testing.T) {
 
 	//Act
 	for _, testCase := range testTable {
-		result := toIntSlice(testCase.str)
+		result := stringToIntSlice(testCase.str)
 
 		t.Logf("Calling ToIntSlice(%s), result %d\n",
 			testCase.str, testCase.expected)
@@ -78,7 +78,7 @@ func TestIsMoskow(t *testing.T) {
 
 	//Act
 	for _, testCase := range testTable {
-		result := isMoskow(testCase.input)
+		result := isMoscow(testCase.input)
 
 		t.Logf("Calling isMoscow(%d), result %v\n",
 			testCase.input, testCase.expected)
