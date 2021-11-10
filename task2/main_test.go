@@ -98,4 +98,138 @@ func TestCanBeNested(t *testing.T) {
 	}
 }
 
+func TestСheckNesting(t *testing.T) {
+	testTable := []struct{
+		env1, env2 Envelope
+		expected   string
+	}{
+		{
+			env1: Envelope{1, 1},
+			env2: Envelope{2, 2},
+			expected: "First can be nested into Second",
+		},
+		{
+			env1:Envelope{10, 5},
+			env2: Envelope{6, 4.9},
+			expected: "Second can be nested into First",
+		},
+		{
+			env1: Envelope{9, 5},
+			env2: Envelope{8.9, 5.1},
+			expected: "Envelopes cannot be nested to each other",
+		},
+	}
 
+	for _, testCase := range testTable {
+		result := checkNesting(testCase.env1, testCase.env2)
+
+		t.Logf("Calling СheckNesting(%v,%v), result %v\n",
+			testCase.env1,testCase.env2, testTable)
+
+		if result != testCase.expected {
+			t.Errorf("Incorrect expected. Expect expected message %v but got %v -> for input params %v as envelope 1 and %v as envelope 2", testCase.expected, result, testCase.env1, testCase.env2)
+		}
+	}
+}
+
+/*
+func TestAskForContinuing(t *testing.T) {
+	testTable := []struct{
+		output string
+		text 	  ask
+		expected  bool
+	}{
+		{
+			text: askForContinuing,
+			expected: true,
+		},
+		{
+			text: "true",
+			expected: true,
+		},
+		{
+			text: "YES",
+			expected: true,
+		},
+		{
+			text: "Y",
+			expected: true,
+		},
+		{
+			text: "",
+			expected: false,
+		},
+		{
+			text: "no",
+			expected: false,
+		},
+	}
+	for _, testCase := range testTable {
+		result := checkContinuing(testCase.text)
+
+		t.Logf("Calling СheckNesting(%v,%v), result %v\n",
+			testCase.env1,testCase.env2, testTable)
+
+		if result != testCase.expected {
+			t.Errorf("Incorrect expected. Expect expected message %v but got %v -> for input params %v as envelope 1 and %v as envelope 2", testCase.expected, result, testCase.env1, testCase.env2)
+		}
+	}
+
+	for _, test := range testcases {
+		curResult := weContinue(test.param)
+		if curResult != test.result {
+			t.Errorf("expected %v but got %v -> for input param %v", test.result, curResult, test.param)
+		}
+	}
+}
+
+func TestСheckContinuing(t *testing.T) {
+	testTable := []struct{
+		askForContinuing ask
+		text 	  string
+		expected  bool
+	}{
+		{
+			text: "yes" ,
+			expected: true,
+		},
+		{
+			text: "y",
+			expected: true,
+		},
+		{
+			text: "YES",
+			expected: true,
+		},
+		{
+			text: "Y",
+			expected: true,
+		},
+		{
+			text: "",
+			expected: false,
+		},
+		{
+			answer : askForContinuing,
+			text: "no",
+			expected: false,
+		},
+	}
+	for _, testCase := range testTable {
+		result := checkContinuing(testCase.)
+
+		t.Logf("Calling СheckNesting(%v,%v), result %v\n",
+			testCase.env1,testCase.env2, testTable)
+
+		if result != testCase.expected {
+			t.Errorf("Incorrect expected. Expect expected message %v but got %v -> for input params %v as envelope 1 and %v as envelope 2", testCase.expected, result, testCase.env1, testCase.env2)
+		}
+	}
+
+	for _, test := range testcases {
+		curResult := weContinue(test.param)
+		if curResult != test.result {
+			t.Errorf("expected %v but got %v -> for input param %v", test.result, curResult, test.param)
+		}
+	}
+} */
