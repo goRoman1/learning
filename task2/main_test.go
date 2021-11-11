@@ -132,104 +132,45 @@ func TestСheckNesting(t *testing.T) {
 	}
 }
 
-/*
+
 func TestAskForContinuing(t *testing.T) {
 	testTable := []struct{
-		output string
-		text 	  ask
+		input string
 		expected  bool
 	}{
 		{
-			text: askForContinuing,
+			input: "yes",
 			expected: true,
 		},
 		{
-			text: "true",
+			input: "y",
 			expected: true,
 		},
 		{
-			text: "YES",
+			input: "YES",
 			expected: true,
 		},
 		{
-			text: "Y",
+			input: "Y",
 			expected: true,
 		},
 		{
-			text: "",
+			input: "",
 			expected: false,
 		},
 		{
-			text: "no",
+			input: "no",
 			expected: false,
 		},
 	}
 	for _, testCase := range testTable {
-		result := checkContinuing(testCase.text)
+		result := checkIfContinuing(testCase.input)
 
-		t.Logf("Calling СheckNesting(%v,%v), result %v\n",
-			testCase.env1,testCase.env2, testTable)
+		t.Logf("Calling checkIfContinuing(%s), result %v\n",
+			testCase.input, testTable)
 
 		if result != testCase.expected {
-			t.Errorf("Incorrect expected. Expect expected message %v but got %v -> for input params %v as envelope 1 and %v as envelope 2", testCase.expected, result, testCase.env1, testCase.env2)
-		}
-	}
-
-	for _, test := range testcases {
-		curResult := weContinue(test.param)
-		if curResult != test.result {
-			t.Errorf("expected %v but got %v -> for input param %v", test.result, curResult, test.param)
+			t.Errorf("Incorrect expected. Expected  %v but got %v -> for input params %s", testCase.expected, result, testCase.input)
 		}
 	}
 }
-
-func TestСheckContinuing(t *testing.T) {
-	testTable := []struct{
-		askForContinuing ask
-		text 	  string
-		expected  bool
-	}{
-		{
-			text: "yes" ,
-			expected: true,
-		},
-		{
-			text: "y",
-			expected: true,
-		},
-		{
-			text: "YES",
-			expected: true,
-		},
-		{
-			text: "Y",
-			expected: true,
-		},
-		{
-			text: "",
-			expected: false,
-		},
-		{
-			answer : askForContinuing,
-			text: "no",
-			expected: false,
-		},
-	}
-	for _, testCase := range testTable {
-		result := checkContinuing(testCase.)
-
-		t.Logf("Calling СheckNesting(%v,%v), result %v\n",
-			testCase.env1,testCase.env2, testTable)
-
-		if result != testCase.expected {
-			t.Errorf("Incorrect expected. Expect expected message %v but got %v -> for input params %v as envelope 1 and %v as envelope 2", testCase.expected, result, testCase.env1, testCase.env2)
-		}
-	}
-
-	for _, test := range testcases {
-		curResult := weContinue(test.param)
-		if curResult != test.result {
-			t.Errorf("expected %v but got %v -> for input param %v", test.result, curResult, test.param)
-		}
-	}
-} */

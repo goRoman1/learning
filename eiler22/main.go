@@ -8,36 +8,9 @@ import (
 	"strings"
 )
 
-var alphabet = []string{
-	"A",
-	"B",
-	"C",
-	"D",
-	"E",
-	"F",
-	"G",
-	"H",
-	"I",
-	"J",
-	"K",
-	"L",
-	"M",
-	"N",
-	"O",
-	"P",
-	"Q",
-	"R",
-	"S",
-	"T",
-	"U",
-	"V",
-	"W",
-	"X",
-	"Y",
-	"Z",
-}
+var alphabet = []string{"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"}
 
-func namePoints(slice []string, value string)int {
+func countNamePoints(slice []string, value string)int {
 	var sum int
 	for _, val := range value {
 		letter := string(val)
@@ -93,7 +66,7 @@ func main() {
 	sliceOfNames := readStr()
 	sort.Strings(sliceOfNames)
 	num1 := findNumberInSortedSlice(sliceOfNames,nameUpper)
-	num2 := namePoints(alphabet,nameUpper)
+	num2 := countNamePoints(alphabet,nameUpper)
 	result := num1 * num2
 	fmt.Sprintf("%s получает %d очков",nameUpper, result )
 }
