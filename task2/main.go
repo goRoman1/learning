@@ -30,7 +30,7 @@ func envelopeInitialisation()Envelope{
 		var sideInput string
 		_, err := fmt.Scanln(&sideInput)
 		if err != nil {
-			fmt.Println("An error occurred on iteration:", i+1 , "You did not enter a value")
+			fmt.Println("You did not enter a value")
 			i--
 			continue
 		}

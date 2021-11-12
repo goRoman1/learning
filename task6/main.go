@@ -64,7 +64,7 @@ func stringToIntSlice(str string)[]int{
 	for _, elem := range slice {
 		number,err := strconv.Atoi(elem)
 		if err != nil {
-			log.Fatal(err)
+			continue
 		}
 		intSlice = append(intSlice, number)
 	}
@@ -73,50 +73,45 @@ func stringToIntSlice(str string)[]int{
 
 func isTruePiter(slice []int)bool{
 	var odd, even int
-	fmt.Println(slice)
-	if len(slice) == 6{
-		for i := range slice{
-			if i%2 == 0 {
-				even += slice[i]
-			}else if i%2 != 0{
-				odd += slice[i]
-			}
-		}
-	}else {
-		fmt.Println("len is not 6")
+	if len(slice) != 6{
 		return false
 	}
+
+	for i := range slice{
+		if i%2 == 0 {
+			even += slice[i]
+		}else if i%2 != 0{
+			odd += slice[i]
+		}
+	}
+
 	return odd == even
 }
 
 func isPiter(slice []int)bool{
 	var odd, even int
-	fmt.Println(slice)
-	if len(slice) == 6{
-		for _ , v:= range slice{
-			if v%2 == 0 {
-				even += v
-			}else if v%2 != 0{
-				odd += v
-			}
-		}
-	}else {
-		fmt.Println("len is not 6")
+	if len(slice) != 6{
 		return false
+	}
+	for _ , v:= range slice{
+		if v%2 == 0 {
+			even += v
+		}else if v%2 != 0{
+			odd += v
+		}
 	}
 	return odd == even
 }
 
 func isMoscow(slice []int)bool{
 	var start, fin int
-	fmt.Println(slice)
-	if len(slice) == 6{
-		start = slice[0] + slice[1] + slice[2]
-		fin = slice[3] + slice[4] + slice[5]
-	}else {
-		fmt.Println("len is not 6")
+	if len(slice) != 6{
 		return false
 	}
+
+	start = slice[0] + slice[1] + slice[2]
+	fin = slice[3] + slice[4] + slice[5]
+
 	return start == fin
 }
 
