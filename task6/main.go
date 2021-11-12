@@ -9,6 +9,26 @@ import (
 	"strings"
 )
 
+func parseFile(path string)[]string{
+	var lines []string
+	file, err := os.Open(path) //"1.txt"
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer file.Close()
+	scanner := bufio.NewScanner(file)
+
+	for scanner.Scan() {
+		lines = append(lines, scanner.Text())
+	}
+
+	if err := scanner.Err();
+		err != nil {
+		log.Fatal(err)
+	}
+	return lines
+}
+
 func executeAlgorithm(strSlice []string)string{
 	var amount int
 	switch strings.ToLower(strSlice[0]) {
@@ -26,6 +46,13 @@ func executeAlgorithm(strSlice []string)string{
 			}
 		}
 		return strconv.Itoa(amount)+ " numbers is Piter"
+	case "truepiter":
+		for _, v := range strSlice[1:]{
+			if isTruePiter(stringToIntSlice(v)){
+				amount++
+			}
+		}
+		return strconv.Itoa(amount)+ " numbers is truePiter"
 	default:
 		return "unknown algorithm"
 	}
@@ -44,8 +71,9 @@ func stringToIntSlice(str string)[]int{
 	return intSlice
 }
 
-func isPiter(slice []int)bool{
+func isTruePiter(slice []int)bool{
 	var odd, even int
+	fmt.Println(slice)
 	if len(slice) == 6{
 		for i := range slice{
 			if i%2 == 0 {
@@ -61,8 +89,27 @@ func isPiter(slice []int)bool{
 	return odd == even
 }
 
+func isPiter(slice []int)bool{
+	var odd, even int
+	fmt.Println(slice)
+	if len(slice) == 6{
+		for _ , v:= range slice{
+			if v%2 == 0 {
+				even += v
+			}else if v%2 != 0{
+				odd += v
+			}
+		}
+	}else {
+		fmt.Println("len is not 6")
+		return false
+	}
+	return odd == even
+}
+
 func isMoscow(slice []int)bool{
 	var start, fin int
+	fmt.Println(slice)
 	if len(slice) == 6{
 		start = slice[0] + slice[1] + slice[2]
 		fin = slice[3] + slice[4] + slice[5]
@@ -72,28 +119,6 @@ func isMoscow(slice []int)bool{
 	}
 	return start == fin
 }
-
-func parseFile(path string)[]string{
-	var lines []string
-	file, err := os.Open(path) //"1.txt"
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer file.Close()
-	scanner := bufio.NewScanner(file)
-
-	for scanner.Scan() {
-		lines = append(lines, scanner.Text())
-	}
-
-	if err := scanner.Err();
-	err != nil {
-		log.Fatal(err)
-	}
-	return lines
-}
-
-
 
 func main(){
 	var algorithmPath string

@@ -64,6 +64,40 @@ func TestIsPiter(t *testing.T) {
 	}
 }
 
+func TestIsTruePiter(t *testing.T) {
+	//Arrange
+	testTable := []struct {
+		input    	[]int
+		expected 	bool
+	}{
+		{
+			input: []int{2,2,2,2,2,2},
+			expected: false,
+		},
+		{
+			input: []int{6,6,3,3,3,3},
+			expected: true,
+		},
+	}
+
+	//Act
+	for _, testCase := range testTable {
+		result := isTruePiter(testCase.input)
+
+		t.Logf("Calling isTruePiter(%d), result %v\n",
+			testCase.input, testCase.expected)
+		if len(testCase.input) != 6 {
+			t.Errorf("Incorrect result. Expect input len  = 6, got %d ",
+				len(testCase.input))
+		}
+		if result != testCase.expected {
+			t.Errorf("Incorrect result. Expect %v, got %v",
+				testCase.expected, result)
+		}
+
+	}
+}
+
 func TestIsMoskow(t *testing.T) {
 	//Arrange
 	testTable := []struct {
