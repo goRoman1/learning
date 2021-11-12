@@ -38,11 +38,11 @@ func TestIsPiter(t *testing.T) {
 	}{
 		{
 			input: []int{2,2,2,2,2,2},
-			expected: true,
+			expected: false,
 		},
 		{
 			input: []int{1,4,3,2,1,1},
-			expected: false,
+			expected: true,
 		},
 	}
 
@@ -72,7 +72,7 @@ func TestIsTruePiter(t *testing.T) {
 	}{
 		{
 			input: []int{2,2,2,2,2,2},
-			expected: false,
+			expected: true,
 		},
 		{
 			input: []int{6,6,3,3,3,3},
@@ -163,7 +163,7 @@ func TestExecuteAlgorithm(t *testing.T) {
 	}{
 		{
 			path:  []string{"piter","131113", "333222", "641146", "325910"},
-			expected: "1 numbers is Piter",
+			expected: "0 numbers is Piter",
 		},
 		{
 			path:  []string{"moscow","131113", "333222", "641146", "325910"},
